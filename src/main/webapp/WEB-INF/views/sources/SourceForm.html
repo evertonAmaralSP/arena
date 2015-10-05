@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/layout:: head">
+<title>FERA - BETA</title>
+</head>
+<body>
+	<th:block th:replace="fragments/layout:: menu" />
+	<div class="container corpo-conteudo" role="main">
+		<div class="starter-template">
+			<h1>Novo/Edição Source</h1>
+			<form method="post" th:object="${source}"
+				th:action="@{/sources/save}" role="form">
+				<input type="hidden" name="id" th:value="*{id}" />
+				<div class="form-group">
+					<label for="name">Nome</label>
+					<input type="text" class="form-control" th:value="*{name}" th:field="*{name}" placeholder="Nome" />
+					<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+				</div>
+				<div class="form-group">
+					<label for="name">Descrição</label>
+					<input type="text" class="form-control" th:value="*{description}" th:field="*{description}" placeholder="Descrição" />
+					<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+				</div>
+				<div class="form-group">
+					<label for="name">Source</label>
+					<input type="text" class="form-control" th:value="*{source}" th:field="*{source}" placeholder="http://editorial.api.abril.com.br/..." />
+					<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('source')}" th:errors="*{source}"></div>
+				</div>
+				<div class="checkbox">
+				  <label>
+				    <input type="checkbox"  th:field="*{active}" th:value="*{active}"/>
+				    Ativa
+				  </label>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+<th:block th:replace="fragments/layout:: footer-javascript " />
+</html>

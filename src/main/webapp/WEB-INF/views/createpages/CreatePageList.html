@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/layout:: head">
+<title>FERA - BETA</title>
+</head>
+<body>
+	<th:block th:replace="fragments/layout:: menu" />
+	<div class="container corpo-conteudo" role="main">
+		<div class="starter-template">
+			<h1>Lista Paginas</h1>
+			<p><a href="new" class="btn btn-primary" >Novo Pagina</a></p>
+
+			<th:block th:if="${listPage}">
+				<table class="table">
+					<th>Nome</th>
+					<th>Gerenciamento</th>
+					<tr th:each="page : ${listPage}">
+						<td th:text="${page.name}"></td>
+						<td>
+						  <a class="btn btn-primary btn-xs" th:href="@{/createpages/__${page.id}__/edit}">Editar</a>
+						  <a class="btn btn-danger btn-xs" th:href="@{/createpages/__${page.id}__/delete}">Deletar</a>
+						</td>
+					</tr>
+				</table>
+			</th:block>
+			<h1 th:unless="${listComponentes}" style="color:#ccc">...Lista Vazia...</h1>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+</body>
+<th:block th:replace="fragments/layout:: footer-javascript " />
+</html>

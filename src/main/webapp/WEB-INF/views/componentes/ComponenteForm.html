@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/layout:: head">
+<title>FERA - BETA</title>
+</head>
+<body>
+	<th:block th:replace="fragments/layout:: menu" />
+	<div class="container corpo-conteudo" role="main">
+		<div class="starter-template">
+			<h1>Novo/Edição Componente </h1>
+			<form method="post" th:object="${componente}" th:action="@{/componentes/save}" role="form" enctype="multipart/form-data">
+			<input type="hidden" name="id" th:value="*{id}"/>
+			<div class="form-group">
+				<label for="teplateId">Template</label>
+				<select class="form-control selectCustom" th:field="*{templateId}">
+					<option value="" label="--- Select ---"></option>
+					<option th:each="template : ${listTemplate}" th:value="${template.id}" th:text="${template.name}"></option>
+				</select>
+				<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('templateId')}" th:errors="*{templateId}"></div>
+			</div>
+
+			<div class="form-group">
+				<label for="type">Tipo Componente</label>
+				<select class="form-control selectCustom"  th:field="*{type}">
+					<option value="" label="--- Select ---"></option>
+					<option th:each="type : ${listType}" th:value="${type}" th:text="${type}"></option>
+				</select>
+				<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+			</div>
+
+			<div class="form-group">
+				<label for="type">Icone Componente</label>
+				<select class="form-control selectCustom" th:field="*{icon}">
+					<option value=""> -- Select Item --</option>
+					<option data-icon="entypo-menu" value="entypo-menu"> Menu</option>
+					<option data-icon="entypo-window" value="entypo-window"> Publicidade</option>
+					<option data-icon="entypo-newspaper" value="entypo-newspaper"> Matéria</option>
+					<option data-icon="entypo-list" value="entypo-list"> Lista</option>
+					<option data-icon="entypo-sweden" value="entypo-sweden"> Footer</option>
+				</select>
+				<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('icon')}" th:errors="*{icon}"></div>
+			</div>
+
+			<!-- <div class="form-group">
+				<label for="name">Nome</label>
+				<input type="text" class="form-control" th:value="*{name}" th:field="*{name}" placeholder="name" />
+				<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+			</div>
+			<div class="form-group">
+				<label for="name">Descrição</label>
+				<input type="text" class="form-control" th:value="*{description}" th:field="*{description}" placeholder="Descrição" />
+				<div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+			</div> -->
+			<!-- DESABILITADO POR HORA PROMOVER A SIMPLICIDADE-->
+			<!-- <div class="form-group" id="componenteMultFile">
+				<label for="file">Upload de arquivo para componente:</label>
+				<input type="file" name="files" class="filestyle"  data-buttonName="btn-primary" accept=".js" data-buttonBefore="true" data-buttonText="Escolher arquivo"/>
+			</div>
+			<a class="btn btn-primary btn-xs" style="float: right; margin-top:10px;" id="addArquivoJS" href="javascript:void(0);">Adicionar mais arquivos</a>
+			<th:block th:if="${feraErrors}">
+			 	<th:block th:if="${feraErrors.is('file.not.valide')}">
+		 	 		<div  class="alert alert-danger" role="alert" th:text="${feraErrors.get('file.not.valide')}">ERROR</div>
+		 	 	</th:block>
+		 	 	<th:block th:if="${feraErrors.is('global.inesperado')}">
+		 	 		<div  class="alert alert-danger" role="alert" th:text="${feraErrors.get('global.inesperado')}">ERROR</div>
+		 	 	</th:block>
+		  </th:block> -->
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+			</form>
+
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+</body>
+<th:block th:replace="fragments/layout:: footer-javascript " />
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+$(".selectCustom").selectpicker();
+var componenteFile = '<input type="file" name="files" class="filestyle"/>';
+var index=1;
+$( document ).ready(function() {
+	 $("#addArquivoJS").click(function(){
+		 $.tmpl(componenteFile,{"index":index}).appendTo("#componenteMultFile");
+		 $(":file").filestyle({"buttonName":"btn-primary","buttonText":"Escolher arquivo",buttonBefore: true});
+		 index++
+	 });
+});
+/*]]>*/
+
+</script>
+</html>

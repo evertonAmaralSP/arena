@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/layout:: head">
+<title>FERA - BETA</title>
+</head>
+<body>
+	<th:block th:replace="fragments/layout:: menu" />
+	<div class="container corpo-conteudo" role="main">
+		<div class="starter-template">
+			<h1>Marca</h1>
+			<table class="table">
+				<th>Name</th>
+				<!-- <th>Lista Arquivos Gerados</th> -->
+				<th>Lista Upload</th>
+				<tr th:each="app : ${listProducts}">
+					<td th:text="${app.name}"></td>
+					<!-- <td><a th:href="@{/marcas/__${app.id}__/listExports}">Lista</a></td> -->
+					<td><a th:href="@{/marcas/__${app.id}__/upload}">upload</a></td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+</body>
+<th:block th:replace="fragments/layout:: footer-javascript " />
+</html>

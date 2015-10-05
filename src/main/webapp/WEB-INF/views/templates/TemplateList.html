@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/layout:: head">
+<title>FERA - BETA</title>
+</head>
+<body>
+	<th:block th:replace="fragments/layout:: menu" />
+	<div class="container corpo-conteudo" role="main">
+		<div class="starter-template">
+			<h1>Lista Template</h1>
+			<p><a href="new" class="btn btn-primary" >Nova Template</a></p>
+
+			<table class="table">
+				<th>Name</th>
+				<th>Marca</th>
+				<th>Publicado?</th>
+				<th>Processe em Massa</th>
+				<th>Processe Unitario</th>
+				<th>Gerenciamento</th>
+				<tr th:each="template : ${listTemplates}">
+					<td th:text="${template.name}"></td>
+					<td th:text="${template.product.name}"></td>
+					<td th:if="${template.document}">  <span class="glyphicon glyphicon-ok-circle" style="color:#5cb85c;margin-left:30px;"></span></td>
+					<td th:unless="${template.document}"> <span class="glyphicon glyphicon-ban-circle" style="color:#d9534f;margin-left:30px;"></span></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/templates/__${template.id}__/re}">Re-Processar</a></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/templates/__${template.id}__/un}">Unitario</a></td>
+					<td>
+					  <a class="btn btn-primary btn-xs" th:href="@{/templates/__${template.id}__/edit}">Editar</a>&nbsp;
+					  <a class="btn btn-danger btn-xs" th:href="@{/templates/__${template.id}__/delete}">Deletar</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+</body>
+<th:block th:replace="fragments/layout:: footer-javascript " />
+</html>
